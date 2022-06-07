@@ -1,14 +1,12 @@
-package com.inventory.demo.entity;
+package com.inventory.demo.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.Entity;
+import lombok.*;
 
 @Setter
 @Getter
-@Entity
-public class Product extends BaseEntity {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductDto extends BaseDto{
     private String productName;
     private String batchId;
     private Double originalPrice;
