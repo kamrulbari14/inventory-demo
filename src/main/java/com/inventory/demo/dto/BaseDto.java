@@ -12,5 +12,5 @@ public class BaseDto {
     private Long id;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Boolean isActive;
+    private Integer isActive;
 }

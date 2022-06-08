@@ -3,6 +3,7 @@ package com.inventory.demo.service.impl;
 import com.inventory.demo.dto.ProductDto;
 import com.inventory.demo.dto.Response;
 import com.inventory.demo.entity.Product;
+import com.inventory.demo.enums.ActiveStatus;
 import com.inventory.demo.repository.ProductRepository;
 import com.inventory.demo.service.ProductService;
 import com.inventory.demo.util.ResponseBuilder;
@@ -24,11 +25,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Response saveProduct(ProductDto productDto) {
-        Product product = productRepository.findByBatchIdAndIsActive(productDto.getBatchId(), Boolean.TRUE);
+        Product product = productRepository.findByProductNameAndIsActive(productDto.getProductName(), ActiveStatus.ACTIVE.getValue());
         if (product != null) {
             productDto.setId(product.getId());
         }
-        productDto.setIsActive(Boolean.TRUE);
+        productDto.setIsActive(ActiveStatus.ACTIVE.getValue());
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         product = modelMapper.map(productDto, Product.class);
         productRepository.save(product);
