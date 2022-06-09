@@ -18,9 +18,10 @@ public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Boolean isActive;
+    private Integer isActive;
 
     @PrePersist
     public void preInsert() {
