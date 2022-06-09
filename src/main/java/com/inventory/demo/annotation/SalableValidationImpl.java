@@ -1,0 +1,18 @@
+package com.inventory.demo.annotation;
+
+import com.inventory.demo.dto.ProductDto;
+
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
+public class SalableValidationImpl implements ConstraintValidator<SalableValidation, ProductDto> {
+    @Override
+    public void initialize(SalableValidation constraintAnnotation) {
+        ConstraintValidator.super.initialize(constraintAnnotation);
+    }
+
+    @Override
+    public boolean isValid(ProductDto productDto, ConstraintValidatorContext constraintValidatorContext) {
+        return productDto.getSalablePrice() > productDto.getOriginalPrice();
+    }
+}

@@ -12,6 +12,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -25,10 +27,14 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Response saveProduct(ProductDto productDto) {
-        Product product = productRepository.findByProductNameAndIsActive(productDto.getProductName(), ActiveStatus.ACTIVE.getValue());
-        if (product != null) {
-            productDto.setId(product.getId());
+        if (productDto.getSalablePrice() > productDto.getOriginalPrice()) {
+            return ResponseBuilder.getFailureResponse(HttpStatus.BAD_REQUEST, "Salable Price Should greater than" +
+                    " Original Price");
         }
+        Optional<Product> existingProduct = productRepository.findByProductNameAndIsActive(productDto.getProductName(),
+                ActiveStatus.ACTIVE.getValue());
+        Product product;
+        existingProduct.ifPresent(value -> productDto.setId(value.getId()));
         productDto.setIsActive(ActiveStatus.ACTIVE.getValue());
         modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         product = modelMapper.map(productDto, Product.class);

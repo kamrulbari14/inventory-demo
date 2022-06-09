@@ -10,12 +10,12 @@ import javax.persistence.Entity;
 @Getter
 @Entity
 public class Product extends BaseEntity {
-    @Column(updatable = false, nullable = false)
+    @Column(nullable = false)
     private String productName;
-    @Column(columnDefinition = "INT UNSIGNED NOT NULL")
+    @Column(columnDefinition = "DOUBLE UNSIGNED NOT NULL")
     private Double originalPrice;
-    @Column(columnDefinition = "INT UNSIGNED NOT NULL")
+    @Column(columnDefinition = "DOUBLE UNSIGNED NOT NULL")
     private Double salablePrice;
     @Column(columnDefinition = "INT UNSIGNED NOT NULL")
-    private Double totalQuantity;
+    private Long totalQuantity;
 }
