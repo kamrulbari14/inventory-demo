@@ -22,6 +22,13 @@ public final class ResponseBuilder {
                     .build();
             dtoList.add(errorResponseDto);
         });
+        if (result.getGlobalError() != null) {
+            ErrorResponseDto errorResponseDto = ErrorResponseDto.builder()
+                    .field(result.getGlobalError().getObjectName())
+                    .message(result.getGlobalError().getDefaultMessage())
+                    .build();
+            dtoList.add(errorResponseDto);
+        }
         return dtoList;
     }
 
