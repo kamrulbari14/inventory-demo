@@ -11,6 +11,9 @@ public class SalableValidationImpl implements ConstraintValidator<SalableValidat
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
 
+    /*TODO
+     *  Need to find a proper solution for this custom validation
+     *  This implementation works fine for one field but need to achieve a way for multiple fields*/
     @Override
     public boolean isValid(ProductDto productDto, ConstraintValidatorContext constraintValidatorContext) {
         return productDto.getSalablePrice() > productDto.getOriginalPrice();

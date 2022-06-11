@@ -1,5 +1,6 @@
 package com.inventory.demo.dto;
 
+import com.inventory.demo.annotation.SalableValidation;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@SalableValidation
 public class ProductDto extends BaseDto {
     @NotBlank(message = "Product name is mandatory and can not be empty")
     private String productName;
