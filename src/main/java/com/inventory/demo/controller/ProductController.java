@@ -68,12 +68,13 @@ public class ProductController {
                                                @RequestParam(defaultValue = "DESC") String sortedDirection) {
         List<ProductDto> productList = productService.getPaginationAndSortedData(pageNo, pageSize, sortedBy,
                 sortedDirection);
-        if (!productList.isEmpty()) {
+        if (productList != null && !productList.isEmpty()) {
             return ResponseBuilder.getSuccessResponse(HttpStatus.OK, "Product Retrieved Successfully!"
                     , productList);
         }
-        return ResponseBuilder.getSuccessResponse(HttpStatus.NOT_FOUND, "No Product Found!"
-                , null);
+        else {
+            return ResponseBuilder.getSuccessResponse(HttpStatus.NOT_FOUND, "No Product Found!"
+                    , null);
+        }
     }
-
 }
